@@ -1,16 +1,16 @@
-import Preload from 'Preload';
+var game = new Phaser.Game(480, 320, Phaser.AUTO, null, { preload: preload, create: create, update: update });
 
-class Game extends Phaser.Game {
+var ball;
 
-	constructor() {
-		super(500, 500, Phaser.AUTO, 'content', null);
-		this.state.add('Preload', Preload, false);
-		this.state.start('Preload');
-	}
+function preload() {
 
+	game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+	game.scale.pageAlignHorizontally = true;
+	game.scale.pageAlignVertically = true;
+	game.stage.backgroundColor = '#eee';
+	game.load.image('ball', '../assets/img/game/gem-01.png');
 }
-let phaser = Phaser
-console.log('phaser', phaser)
-
-let game2 = new Game();
-console.log('Phaser.Game', game2)
+function create() {
+	ball = game.add.sprite(50, 50, 'ball');
+}
+function update() { }

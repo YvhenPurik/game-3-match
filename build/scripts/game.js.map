@@ -1,0 +1,15 @@
+{
+  "version": 3,
+  "sources": [
+    "node_modules/browser-pack/_prelude.js",
+    "src/index.js"
+  ],
+  "names": [],
+  "mappings": "AAAA;;;ACAA,IAAI,OAAO,IAAI,OAAJ,IAAA,CAAA,GAAA,EAAA,GAAA,EAA0B,OAA1B,IAAA,EAAA,IAAA,EAA6C,EAAE,SAAF,OAAA,EAAoB,QAApB,MAAA,EAAoC,QAA5F,MAAwD,EAA7C,CAAX;;AAEA,IAAA,IAAA;;AAEA,SAAA,OAAA,GAAmB;;AAElB,MAAA,KAAA,CAAA,SAAA,GAAuB,OAAA,YAAA,CAAvB,QAAA;AACA,MAAA,KAAA,CAAA,qBAAA,GAAA,IAAA;AACA,MAAA,KAAA,CAAA,mBAAA,GAAA,IAAA;AACA,MAAA,KAAA,CAAA,eAAA,GAAA,MAAA;AACA,MAAA,IAAA,CAAA,KAAA,CAAA,MAAA,EAAA,+BAAA;AACA;AACD,SAAA,MAAA,GAAkB;AACjB,QAAO,KAAA,GAAA,CAAA,MAAA,CAAA,EAAA,EAAA,EAAA,EAAP,MAAO,CAAP;AACA;AACD,SAAA,MAAA,GAAkB,CAAG",
+  "file": "generated.js",
+  "sourceRoot": "",
+  "sourcesContent": [
+    "(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c=\"function\"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error(\"Cannot find module '\"+i+\"'\");throw a.code=\"MODULE_NOT_FOUND\",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u=\"function\"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()",
+    "var game = new Phaser.Game(480, 320, Phaser.AUTO, null, { preload: preload, create: create, update: update });\r\n\r\nvar ball;\r\n\r\nfunction preload() {\r\n\r\n\tgame.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;\r\n\tgame.scale.pageAlignHorizontally = true;\r\n\tgame.scale.pageAlignVertically = true;\r\n\tgame.stage.backgroundColor = '#eee';\r\n\tgame.load.image('ball', '../assets/img/game/gem-01.png');\r\n}\r\nfunction create() {\r\n\tball = game.add.sprite(50, 50, 'ball');\r\n}\r\nfunction update() { }"
+  ]
+}
