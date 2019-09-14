@@ -16,7 +16,9 @@ function preload() {
 function create() {
 	ball = game.add.sprite(50, 50, 'ball');
 }
-function update() {}
+function update() {
+	ball.left += 2;
+}
 
 },{}]},{},[1])
 //# sourceMappingURL=game.js.map
