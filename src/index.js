@@ -7,12 +7,21 @@ function preload() {
 	game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 	game.scale.pageAlignHorizontally = true;
 	game.scale.pageAlignVertically = true;
-	game.stage.backgroundColor = '#eee';
+	game.stage.backgroundColor = '#eee232';
 	game.load.image('ball', '../assets/img/game/gem-01.png');
 }
+
 function create() {
+	game.physics.startSystem(Phaser.Physics.ARCADE);
 	ball = game.add.sprite(50, 50, 'ball');
+	game.physics.enable(ball, Phaser.Physics.ARCADE);
+	ball.body.velocity.set(50, 50);
+	ball.pivot.x = 50
+	ball.pivot.y = 50
+	console.log('create', ball)
 }
 function update() {
-	ball.left += 2
+	ball.rotation += 0.2
+	console.log('update', ball)
+
 }
