@@ -1,81 +1,89 @@
 
 
-var game = new Phaser.Game(1000, 1000, Phaser.AUTO, null, { preload: preload, create: create, update: update });
+var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update });
+let donuts;
+var newDonuts;
+var donutsInfo;
 
-var ball;
-let ball2;
-let ball3;
-let ball4;
-let ball5;
-
-
-
+// let arr =[
+// 	[1,3,4,5,1],
+// 	[2,2,5,1,1],
+// 	[2,3,5,5,1],
+// 	[2,5,2,1,3],
+// 	[2,1,1,3,4]
+// ]
 function preload() {
-
 	game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 	game.scale.pageAlignHorizontally = true;
 	game.scale.pageAlignVertically = true;
-	game.stage.backgroundColor = '#eeeee2';
-	game.load.image('ball', '../assets/img/game/gem-01.png');
-	game.load.image('ball2', '../assets/img/game/gem-02.png');
-	game.load.image('ball3', '../assets/img/game/gem-03.png');
-	game.load.image('ball4', '../assets/img/game/gem-04.png');
-	game.load.image('ball5', '../assets/img/game/gem-05.png');
+	game.stage.backgroundColor = '#eee';
+	game.stage.arr
+	game.load.spritesheet('red-donut', 'assets/img/game/gem-01.png', 193, 71);
+	game.load.spritesheet('blue-donut', 'assets/img/game/gem-02.png', 193, 71);
+	game.load.spritesheet('green-donut', 'assets/img/game/gem-03.png', 193, 71);
+	game.load.spritesheet('esyBlue-donut', 'assets/img/game/gem-04.png', 193, 71);
+	game.load.spritesheet('yellow-donut', 'assets/img/game/gem-05.png', 193, 71);
+	game.load.spritesheet('pink-donut', 'assets/img/game/gem-06.png', 193, 71);
+	game.load.image('background', 'assets/img/backgrounds/background.jpg');
+
+	console.log('hgjhg', game.stage)
 }
+Array.prototype.random = function (length) {
+	return this[Math.floor((Math.random() * length))];
+}
+let arrDonuts = ['red-donut', 'blue-donut', 'green-donut', 'esyBlue-donut', 'yellow-donut', 'pink-donut',]
+var chosen_donut = arrDonuts.random(arrDonuts.length)
+console.log('get rand donut', chosen_donut)
+function initDonuts() {
+	let
+		donutsInfo = {
+			width: 50,
+			height: 50,
+			count: {
+				row: 5,
+				col: 5
+			},
+			offset: {
+				top: 150,
+				left: 250
+			},
+			padding: 30
+		};
+
+	donuts = game.add.group();
+	for (let c = 0; c < donutsInfo.count.col; c++) {
+		for (let r = 0; r < donutsInfo.count.row; r++) {
+			var donutX = (c * (donutsInfo.width + donutsInfo.padding)) + donutsInfo.offset.left;
+			var donutY = (r * (donutsInfo.height + donutsInfo.padding)) + donutsInfo.offset.top;
+			newDonuts = game.add.sprite(donutX, donutY, arrDonuts.random(arrDonuts.length));
+			game.physics.enable(newDonuts, Phaser.Physics.ARCADE);
+			newDonuts.body.immovable = true;
+			newDonuts.anchor.set(0.5);
+
+			donuts.add(newDonuts);
+		}
+	}
+}
+
+
+var ball;
+var background;
 
 function create() {
+
 	game.physics.startSystem(Phaser.Physics.ARCADE);
-	ball = game.add.sprite(50, 50, 'ball');
-	ball2 = game.add.sprite(150, 50, 'ball2');
-	ball3 = game.add.sprite(250, 70, 'ball3');
-	ball4 = game.add.sprite(450, 30, 'ball4');
-	ball5 = game.add.sprite(550, 130, 'ball5');
-
-	game.physics.enable(ball, Phaser.Physics.ARCADE);
-	game.physics.enable(ball2, Phaser.Physics.ARCADE);
-	game.physics.enable(ball3, Phaser.Physics.ARCADE);
-	game.physics.enable(ball4, Phaser.Physics.ARCADE);
-	game.physics.enable(ball5, Phaser.Physics.ARCADE);
-
-	ball.body.gravity.y = 100
-	ball2.body.gravity.y = 60
-	ball3.body.gravity.y = 120
-	ball4.body.gravity.y = 30
-	ball5.body.gravity.y = 230
-
-	ball.body.collideWorldBounds = true;
-	ball.body.bounce.set(1);
-
-	ball2.body.collideWorldBounds = true;
-	ball2.body.bounce.set(1);
-
-	ball3.body.collideWorldBounds = true;
-	ball3.body.bounce.set(1);
-
-	ball4.body.collideWorldBounds = true;
-	ball4.body.bounce.set(1);
-
-	ball5.body.collideWorldBounds = true;
-	ball5.body.bounce.set(1);
-
-	ball.pivot.x = 50
-	ball.pivot.y = 50
-
-	ball2.pivot.x = 50
-	ball2.pivot.y = 50
-
-	ball4.pivot.x = 50
-	ball4.pivot.y = 50
-
-	ball5.pivot.x = 50
-	ball5.pivot.y = 50
-	console.log('create', ball)
+	game.add.tileSprite(0, 0, 1000, 600, 'background')
+	initDonuts()
 }
+
+function clickHandler(el) {
+	el.scale.x += 0.1
+	el.scale.y += 0.1
+	console.log('click on donuts:', el)
+
+}
+
 function update() {
-	ball.rotation += 0.2
-	ball2.rotation += -0.2
-	ball4.rotation += -0.6
-	ball5.rotation += -0.1
-	console.log('update', ball)
+
 
 }
