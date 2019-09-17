@@ -106,7 +106,7 @@ function initDonuts() {
 	console.log('donut-key-initDonuts', key);
 	if (matchVertikal(key)) {
 		console.log('op recursion-->');
-		game.stage.stage.update();
+		game.state.restart();
 		initDonuts();
 	} else {}
 }
