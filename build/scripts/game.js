@@ -1,12 +1,45 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 'use strict';
 
+function _classCallCheck(instance, Constructor) {
+	if (!(instance instanceof Constructor)) {
+		throw new TypeError("Cannot call a class as a function");
+	}
+}
+
+function _possibleConstructorReturn(self, call) {
+	if (!self) {
+		throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+	}return call && (typeof call === "object" || typeof call === "function") ? call : self;
+}
+
+function _inherits(subClass, superClass) {
+	if (typeof superClass !== "function" && superClass !== null) {
+		throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+	}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
+
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update });
 var donuts = void 0;
 var newDonuts;
 var donutsInfo;
 var tempDonut = void 0;
 var countClickDonut = 0;
+Array.prototype.random = function (length) {
+	return this[Math.floor(Math.random() * length)];
+};
+
+var playGame = function (_Phaser$Scene) {
+	_inherits(playGame, _Phaser$Scene);
+
+	function playGame() {
+		_classCallCheck(this, playGame);
+
+		return _possibleConstructorReturn(this, (playGame.__proto__ || Object.getPrototypeOf(playGame)).call(this, "PlayGame"));
+	}
+
+	return playGame;
+}(Phaser.Scene);
 // let arr =[
 // 	[1,3,4,5,1],
 // 	[2,2,5,1,1],
@@ -14,6 +47,8 @@ var countClickDonut = 0;
 // 	[2,5,2,1,3],
 // 	[2,1,1,3,4]
 // ]
+
+
 function preload() {
 	game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 	game.scale.pageAlignHorizontally = true;
@@ -27,11 +62,6 @@ function preload() {
 	game.load.spritesheet('pink-donut', 'assets/img/game/gem-06.png', 193, 71);
 	game.load.image('background', 'assets/img/backgrounds/background.jpg');
 }
-Array.prototype.random = function (length) {
-	return this[Math.floor(Math.random() * length)];
-};
-
-var arrDonuts = ['red-donut', 'blue-donut', 'green-donut', 'esyBlue-donut', 'yellow-donut', 'pink-donut'];
 
 function matchVertikal(list) {
 	// vertical initial match
@@ -85,7 +115,12 @@ function initDonuts() {
 	donuts = game.add.group();
 	// console.log('game--initDonuts', game)
 
+	var arrDonuts = ['red-donut', 'blue-donut', 'green-donut', 'esyBlue-donut', 'yellow-donut', 'pink-donut'];
 
+	function random_item(items) {
+		console.log('items', items);
+		return items[Math.floor(Math.random() * items.length)];
+	}
 	for (var c = 0; c < donutsInfo.count.col; c++) {
 		for (var r = 0; r < donutsInfo.count.row; r++) {
 			var donutX = c * (donutsInfo.width + donutsInfo.padding) + donutsInfo.offset.left;
@@ -136,6 +171,7 @@ var secondEllPosition = {
 };
 function listener(el) {
 	countClickDonut++;
+	console.log('ael', el);
 	if (countClickDonut == 1) {
 		firstEllPosition.x = el.position.x;
 		firstEllPosition.y = el.position.y;
