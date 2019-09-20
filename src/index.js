@@ -5,7 +5,15 @@ let donuts;
 var newDonuts;
 var donutsInfo;
 let tempDonut;
-
+let countClickDonut = 0;
+Array.prototype.random = function (length) {
+	return this[Math.floor((Math.random() * length))];
+}
+class playGame extends Phaser.Scene {
+	constructor() {
+		super("PlayGame");
+	}
+}
 // let arr =[
 // 	[1,3,4,5,1],
 // 	[2,2,5,1,1],
@@ -28,11 +36,9 @@ function preload() {
 
 
 }
-Array.prototype.random = function (length) {
-	return this[Math.floor((Math.random() * length))];
-}
 
-let arrDonuts = ['red-donut', 'blue-donut', 'green-donut', 'esyBlue-donut', 'yellow-donut', 'pink-donut',]
+
+
 
 function matchVertikal(list) {
 	// vertical initial match
@@ -109,9 +115,15 @@ function initDonuts() {
 		};
 
 	donuts = game.add.group();
-	console.log('game--initDonuts', game)
+	// console.log('game--initDonuts', game)
 
+	let arrDonuts = ['red-donut', 'blue-donut', 'green-donut', 'esyBlue-donut', 'yellow-donut', 'pink-donut',]
 
+	function random_item(items) {
+		console.log('items', items)
+		return items[Math.floor(Math.random() * items.length)];
+
+	}
 	for (let c = 0; c < donutsInfo.count.col; c++) {
 		for (let r = 0; r < donutsInfo.count.row; r++) {
 			var donutX = (c * (donutsInfo.width + donutsInfo.padding)) + donutsInfo.offset.left;
@@ -120,6 +132,8 @@ function initDonuts() {
 			game.physics.enable(newDonuts, Phaser.Physics.ARCADE);
 			newDonuts.body.immovable = true;
 			newDonuts.anchor.set(0.5);
+			newDonuts.inputEnabled = true;
+			newDonuts.events.onInputDown.add(listener, this);
 			donuts.add(newDonuts);
 
 		}
@@ -133,9 +147,10 @@ function initDonuts() {
 	} catch (error) {
 
 	}
-	console.log('donut-key-initDonuts', key)
+	// console.log('donut-key-initDonuts', key)
 	if (matchVertikal(key)) {
 		console.log('op recursion-->')
+
 		game.state.restart()
 		initDonuts()
 	} else {
@@ -158,11 +173,97 @@ function create(el) {
 
 
 }
+let arrPush = [];
+let firstEllPosition = {
+	x: 0,
+	y: 0
+};
+let secondEllPosition = {
+	x: 0,
+	y: 0
+};
+function listener(el) {
+	countClickDonut++
+	console.log('ael', el)
+	if (countClickDonut == 1) {
+		firstEllPosition.x = el.position.x
+		firstEllPosition.y = el.position.y
 
-function clickHandler(el) {
-	el.scale.x += 0.1
-	el.scale.y += 0.1
-	console.log('click on donuts:', el)
+	}
+	if (countClickDonut > 1) {
+		secondEllPosition.x = el.position.x
+		secondEllPosition.y = el.position.y
+	}
+	const horizontalStepAvailable = secondEllPosition.x - firstEllPosition.x == 160
+		|| secondEllPosition.x - firstEllPosition.x == -160
+		|| secondEllPosition.x - firstEllPosition.x == 240
+		|| secondEllPosition.x - firstEllPosition.x == -240
+		|| secondEllPosition.x - firstEllPosition.x == 320
+		|| secondEllPosition.x - firstEllPosition.x == -320
+
+	const verticallStepAvailable = secondEllPosition.y - firstEllPosition.y == 160
+		|| secondEllPosition.y - firstEllPosition.y == -160
+		|| secondEllPosition.y - firstEllPosition.y == 240
+		|| secondEllPosition.y - firstEllPosition.y == -240
+		|| secondEllPosition.y - firstEllPosition.y == 320
+		|| secondEllPosition.y - firstEllPosition.y == -320
+
+	console.log('firstEllPosition  ', firstEllPosition.y, 'secondEllPosition  ', secondEllPosition.y)
+	if (countClickDonut <= 2 && el.scale.x < 1.1) {
+		arrPush.push(el)
+		el.scale.x += 0.1
+		el.scale.y += 0.1
+		//console.log('www',firstEllPosition.x - secondEllPosition.x)
+		if (countClickDonut == 2 && secondEllPosition.x - firstEllPosition.x == 80 || secondEllPosition.x - firstEllPosition.x == -80 || secondEllPosition.y - firstEllPosition.y == 80 || secondEllPosition.y - firstEllPosition.y == -80) {
+			countClickDonut = 0;
+
+			arrPush[0].position.x = secondEllPosition.x;
+			arrPush[0].position.y = secondEllPosition.y;
+			arrPush[1].position.x = firstEllPosition.x;
+			arrPush[1].position.y = firstEllPosition.y;
+
+			firstEllPosition.x = null;
+			firstEllPosition.y = null;
+			secondEllPosition.x = null;
+			secondEllPosition.y = null;
+			el = arrPush.map((el) => {
+				el.scale.x = 1
+				el.scale.y = 1
+			});
+			//initDonuts()
+			arrPush.length = 0
+		} else if (horizontalStepAvailable || verticallStepAvailable) {
+			countClickDonut = 0;
+			el = arrPush.map((el) => {
+				el.scale.x = 1
+				el.scale.y = 1
+			})
+			var style = { font: "32px Arial", fill: "#000000", align: "center" };
+			var text = game.add.text(game.world.centerX, game.world.centerY + 270, "incorrect choice", style);
+			setTimeout(() => {
+				text.destroy()
+			}, 1500)
+			text.anchor.set(0.5);
+			arrPush.length = 0
+			firstEllPosition.x = null;
+			firstEllPosition.y = null;
+			secondEllPosition.x = null;
+			secondEllPosition.y = null;
+		}
+	} else {
+		console.log('else')
+		countClickDonut = 0;
+		el = arrPush.map((el) => {
+			el.scale.x = 1
+			el.scale.y = 1
+		})
+		arrPush.length = 0
+		firstEllPosition.x = null;
+		firstEllPosition.y = null;
+		secondEllPosition.x = null;
+		secondEllPosition.y = null;
+	}
+
 
 }
 
