@@ -6,6 +6,14 @@ var newDonuts;
 var donutsInfo;
 let tempDonut;
 let countClickDonut = 0;
+Array.prototype.random = function (length) {
+	return this[Math.floor((Math.random() * length))];
+}
+class playGame extends Phaser.Scene {
+	constructor() {
+		super("PlayGame");
+	}
+}
 // let arr =[
 // 	[1,3,4,5,1],
 // 	[2,2,5,1,1],
@@ -28,11 +36,9 @@ function preload() {
 
 
 }
-Array.prototype.random = function (length) {
-	return this[Math.floor((Math.random() * length))];
-}
 
-let arrDonuts = ['red-donut', 'blue-donut', 'green-donut', 'esyBlue-donut', 'yellow-donut', 'pink-donut',]
+
+
 
 function matchVertikal(list) {
 	// vertical initial match
@@ -111,7 +117,13 @@ function initDonuts() {
 	donuts = game.add.group();
 	// console.log('game--initDonuts', game)
 
+	let arrDonuts = ['red-donut', 'blue-donut', 'green-donut', 'esyBlue-donut', 'yellow-donut', 'pink-donut',]
 
+	function random_item(items) {
+		console.log('items', items)
+		return items[Math.floor(Math.random() * items.length)];
+
+	}
 	for (let c = 0; c < donutsInfo.count.col; c++) {
 		for (let r = 0; r < donutsInfo.count.row; r++) {
 			var donutX = (c * (donutsInfo.width + donutsInfo.padding)) + donutsInfo.offset.left;
@@ -172,6 +184,7 @@ let secondEllPosition = {
 };
 function listener(el) {
 	countClickDonut++
+	console.log('ael', el)
 	if (countClickDonut == 1) {
 		firstEllPosition.x = el.position.x
 		firstEllPosition.y = el.position.y
