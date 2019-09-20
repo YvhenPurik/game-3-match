@@ -6,7 +6,7 @@ var donuts = void 0;
 var newDonuts;
 var donutsInfo;
 var tempDonut = void 0;
-
+var countClickDonuts = 0;
 // let arr =[
 // 	[1,3,4,5,1],
 // 	[2,2,5,1,1],
@@ -14,6 +14,7 @@ var tempDonut = void 0;
 // 	[2,5,2,1,3],
 // 	[2,1,1,3,4]
 // ]
+console.log('countClickDonuts', countClickDonuts);
 function preload() {
 	game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 	game.scale.pageAlignHorizontally = true;
@@ -83,7 +84,7 @@ function initDonuts() {
 	};
 
 	donuts = game.add.group();
-	console.log('game--initDonuts', game);
+	//console.log('game--initDonuts', game)
 
 	for (var c = 0; c < donutsInfo.count.col; c++) {
 		for (var r = 0; r < donutsInfo.count.row; r++) {
@@ -93,6 +94,8 @@ function initDonuts() {
 			game.physics.enable(newDonuts, Phaser.Physics.ARCADE);
 			newDonuts.body.immovable = true;
 			newDonuts.anchor.set(0.5);
+			newDonuts.inputEnabled = true;
+			newDonuts.events.onInputDown.add(clickHandler, this);
 			donuts.add(newDonuts);
 		}
 	}
@@ -103,9 +106,9 @@ function initDonuts() {
 			return el.key;
 		});
 	} catch (error) {}
-	console.log('donut-key-initDonuts', key);
+	//console.log('donut-key-initDonuts', key)
 	if (matchVertikal(key)) {
-		console.log('op recursion-->');
+		// console.log('op recursion-->')
 		game.state.restart();
 		initDonuts();
 	} else {}
@@ -123,9 +126,11 @@ function create(el) {
 }
 
 function clickHandler(el) {
-	el.scale.x += 0.1;
-	el.scale.y += 0.1;
-	console.log('click on donuts:', el);
+	console.log('click donuts', el);
+	countClickDonuts += 1;
+	if (countClickDonuts > 1) {
+		countClickDonuts = 0;
+	}
 }
 
 function update() {}
