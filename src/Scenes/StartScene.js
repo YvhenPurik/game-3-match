@@ -10,7 +10,7 @@ export default class StartScene extends Phaser.Scene {
     this.load.image('logo', '../src/assets/logo.png');
     this.load.image('background', '../src/assets/background.jpg');
     this.load.image('startBtn', '../src/assets/btn-play.png');
-    console.log(this)
+
   }
 
 
@@ -31,10 +31,10 @@ export default class StartScene extends Phaser.Scene {
   create() {
     this.bg = this.add.image(400, 150, "background");
     //bg.anchor.setTo(0.5, 0.5);
-    console.log('bg', this.bg)
+
     this.gameButton = this.add.sprite(100, 200, 'startBtn').setInteractive();
     this.centerButton(this.gameButton, 1);
-    console.log('this---StartScene', this)
+
     // this.gameText = this.add.text(0, 0, 'Play', { fontSize: '32px', fill: '#fff' });
     // this.centerButtonText(this.gameText, this.gameButton);
 
@@ -43,12 +43,12 @@ export default class StartScene extends Phaser.Scene {
     }.bind(this));
 
     this.input.on('pointerover', function (event, gameObjects) {
-      console.log('gameObjects', gameObjects)
+      // console.log('gameObjects', gameObjects)
       gameObjects[0].scale = 1.2;
 
     });
     this.input.on('pointerout', function (event, gameObjects) {
-      console.log('gameObjects', gameObjects)
+      // console.log('gameObjects', gameObjects)
       gameObjects[0].scale = 1;
 
     });
