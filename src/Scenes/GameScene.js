@@ -16,8 +16,10 @@ export default class GameScene extends Phaser.Scene {
       y: null
     };
     this.countClickDonut = 0
+    this.idFirstEl = null;
+    this.idSecondEl = null;
 
-    this.listener = this.listener.bind(this)
+    this.listenerSwap = this.listenerSwap.bind(this)
   }
 
   // method(el) {
@@ -100,18 +102,26 @@ export default class GameScene extends Phaser.Scene {
   }
 
 
-  swapСhildrenSceneItem(xs, i, j) {
-    var temp = xs[j];
-    xs[j] = xs[i];
-    xs[i] = temp;
-    return xs;
-  }
 
 
-  listener(pointer, el) {
-    // console.log('this1', this.children.list)
-    this.swapСhildrenSceneItem(this.children.list, 1, 2)
-    console.log('el', el)
+
+  listenerSwap(pointer, el) {
+    // let idFirstEl = null;
+    // let idSecEl = null;
+    //console.log('this1------>>>', this.children.list)
+    // this.swapСhildrenSceneItem(this.children.list, 1, 2)
+
+
+    let swapСhildrenSceneItem = (xs, i, j) => {
+      var temp = xs[j];
+      xs[j] = xs[i];
+      xs[i] = temp;
+      return xs;
+    }
+
+
+
+    // console.log('el', el)
     this.countClickDonut++
     if (this.countClickDonut == 1) {
 
@@ -123,13 +133,81 @@ export default class GameScene extends Phaser.Scene {
       this.secondEllPosition.x = el.x
       this.secondEllPosition.y = el.y
     }
-    //console.log('this.firstEllPosition.x', this.firstEllPosition.x, 'this.secondEllPosition.x', this.secondEllPosition.x)
-    // console.log('this.firstEllPosition', this.firstEllPosition, 'this.secondEllPosition', this.secondEllPosition)
-    //this.method(el)
+
+    let stepCountHorizont = 5;
+    let stepCountVertical = 5;
+    for (let c = 80; c < 570; c += 80) {
+
+      if (this.firstEllPosition.x < c) {
+        stepCountHorizont--
+      }
+    }
+
+    for (let r = 80; r < 470; r += 80) {
+
+      if (this.firstEllPosition.y < r) {
+        stepCountVertical--
+      }
+    }
+    let matrix = {
+      '1.1': 1,
+      '1.2': 2,
+      '1.3': 3,
+      '1.4': 4,
+      '1.5': 5,
+
+      '2.1': 6,
+      '2.2': 7,
+      '2.3': 8,
+      '2.4': 9,
+      '2.5': 10,
+
+      '3.1': 11,
+      '3.2': 12,
+      '3.3': 13,
+      '3.4': 14,
+      '3.5': 15,
+
+      '4.1': 16,
+      '4.2': 17,
+      '4.3': 18,
+      '4.4': 19,
+      '4.5': 20,
+
+      '5.1': 21,
+      '5.2': 22,
+      '5.3': 23,
+      '5.4': 24,
+      '5.5': 25,
+    }
+    let idFirstEl;
+    let idSecondEl;
+    if (this.countClickDonut == 1) {
+      idFirstEl = matrix[`${stepCountHorizont}.${stepCountVertical}`]
+    } else if (this.countClickDonut == 2) {
+
+      idSecondEl = matrix[`${stepCountHorizont}.${stepCountVertical}`]
+
+    }
 
 
 
 
+    //console.log(`lol ${stepCountHorizont}.${stepCountVertical}`)
+    console.log('idFirstEl->', idFirstEl, 'idSecondEl', idSecondEl)
+
+
+
+
+
+
+    // if (this.firstEllPosition.x == 250 && this.firstEllPosition.y == 150 && this.countClickDonut == 1) {
+    //   this.idFirstEl = 1
+    // } else {
+    //   this.idFirstEl = null
+    // }
+
+    //console.log('idFirstEl', this.idFirstEl, this.countClickDonut)
 
 
     const horizontalStepAvailable = this.secondEllPosition.x - this.firstEllPosition.x == 160
@@ -157,19 +235,12 @@ export default class GameScene extends Phaser.Scene {
         || this.secondEllPosition.y - this.secondEllPosition.x + this.firstEllPosition.y - this.firstEllPosition.x == -360
         || this.secondEllPosition.y - this.secondEllPosition.x + this.firstEllPosition.y - this.firstEllPosition.x == -520
         || this.secondEllPosition.y - this.secondEllPosition.x + this.firstEllPosition.y - this.firstEllPosition.x == -680
-      //|| this.secondEllPosition.y - this.secondEllPosition.x + this.firstEllPosition.y - this.firstEllPosition.x == -600
-      // || this.secondEllPosition.y - this.secondEllPosition.x + this.firstEllPosition.y - this.firstEllPosition.x != -200
-      // || this.secondEllPosition.y - this.secondEllPosition.x + this.firstEllPosition.y - this.firstEllPosition.x != -280
-      // || this.secondEllPosition.y - this.secondEllPosition.x + this.firstEllPosition.y - this.firstEllPosition.x != -120
-      // || this.secondEllPosition.y - this.secondEllPosition.x + this.firstEllPosition.y - this.firstEllPosition.x != -440
-      // || this.secondEllPosition.y - this.secondEllPosition.x + this.firstEllPosition.y - this.firstEllPosition.x != 200
-      // || this.secondEllPosition.y - this.secondEllPosition.x + this.firstEllPosition.y - this.firstEllPosition.x != 600
-      // || this.secondEllPosition.y - this.secondEllPosition.x + this.firstEllPosition.y - this.firstEllPosition.x != 40
+
     } else {
       diagonalStepAvailable = false
     }
 
-    console.log('diagonal sum', this.secondEllPosition.y - this.secondEllPosition.x + this.firstEllPosition.y - this.firstEllPosition.x)
+    //console.log('diagonal sum', this.secondEllPosition.y - this.secondEllPosition.x + this.firstEllPosition.y - this.firstEllPosition.x)
     //console.log('this.firstEllPosition  ', this.firstEllPosition.y, 'this.secondEllPosition  ', this.secondEllPosition.y)
     if (horizontalStepAvailable || verticallStepAvailable || diagonalStepAvailable && this.countClickDonut == 2) {
       this.countClickDonut = 0;
@@ -177,8 +248,8 @@ export default class GameScene extends Phaser.Scene {
         el.scale = 1
 
       })
-      var style = { font: "32px Arial", fill: "#000000", align: "center" };
-      let text = this.add.text(160, 540, "nope only horizontally and vertically", style);
+      var style = { font: "32px Arial", fill: "#ffffff", align: "center" };
+      let text = this.add.text(160, 540, "swap only horizontally and vertically", style);
       setTimeout(() => {
         text.destroy()
       }, 2500)
@@ -224,7 +295,7 @@ export default class GameScene extends Phaser.Scene {
         this.secondEllPosition.y = null;
         el = this.arrPush.map((el) => {
           el.scale = 1
-
+          swapСhildrenSceneItem(this.children.list, this.idFirstEl, this.idSecondEl)
         });
 
         this.arrPush.length = 0
@@ -330,7 +401,7 @@ export default class GameScene extends Phaser.Scene {
 
       this.initDonuts()
     } else {
-      this.input.on('gameobjectdown', this.listener, this);
+      this.input.on('gameobjectdown', this.listenerSwap, this);
     }
 
 
