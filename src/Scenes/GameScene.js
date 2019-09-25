@@ -1,5 +1,5 @@
 import 'phaser';
-
+import Index from '../SecondaryFunction/IndexMatc'
 
 
 
@@ -15,24 +15,23 @@ export default class GameScene extends Phaser.Scene {
       x: null,
       y: null
     };
+
+
     this.countClickDonut = 0
     this.idFirstEl = null;
     this.idSecondEl = null;
+    this.stepCountHorizont = 5;
+    this.stepCountVertical = 5;
 
     this.listenerSwap = this.listenerSwap.bind(this)
   }
 
-  // method(el) {
-  //   // console.log('this.count', this.count)
 
-
-  // }
 
 
   preload() {
-    // load images
-
-    // this.load.audio('GameMusick', '../src/assets/game.mp3');
+    this.index = new Index()
+    this.index.IndexOfmatchElem()
     this.load.image('background', '../src/assets/background.jpg');
     this.load.image('red-donut', '../src/assets/gem-01.png', 193, 71);
     this.load.image('blue-donut', '../src/assets/gem-02.png', 193, 71);
@@ -47,6 +46,7 @@ export default class GameScene extends Phaser.Scene {
 
   matchVertikal(list) {
     // vertical initial match
+    console.log('list', list)
     const equalCol1 = list[0] == list[1] && list[1] == list[2]
       || list[1] == list[2] && list[2] == list[3]
       || list[2] == list[3] && list[3] == list[4];
@@ -103,24 +103,25 @@ export default class GameScene extends Phaser.Scene {
 
 
 
-
+  swapСhildrenSceneItem(xs, i, j) {
+    var temp = xs[j];
+    xs[j] = xs[i];
+    xs[i] = temp;
+    return xs;
+  }
 
   listenerSwap(pointer, el) {
-    // let idFirstEl = null;
-    // let idSecEl = null;
-    //console.log('this1------>>>', this.children.list)
-    // this.swapСhildrenSceneItem(this.children.list, 1, 2)
-
-
-    let swapСhildrenSceneItem = (xs, i, j) => {
-      var temp = xs[j];
-      xs[j] = xs[i];
-      xs[i] = temp;
-      return xs;
-    }
 
 
 
+
+
+
+
+    let stepCountHorizontFirst = 5;
+    let stepCountVerticalFirst = 5;
+    let stepCountHorizontSecond = 5;
+    let stepCountVerticalSecond = 5;
     // console.log('el', el)
     this.countClickDonut++
     if (this.countClickDonut == 1) {
@@ -134,21 +135,42 @@ export default class GameScene extends Phaser.Scene {
       this.secondEllPosition.y = el.y
     }
 
-    let stepCountHorizont = 5;
-    let stepCountVertical = 5;
+
     for (let c = 80; c < 570; c += 80) {
 
       if (this.firstEllPosition.x < c) {
-        stepCountHorizont--
+        stepCountHorizontFirst--
       }
     }
 
     for (let r = 80; r < 470; r += 80) {
 
       if (this.firstEllPosition.y < r) {
-        stepCountVertical--
+        stepCountVerticalFirst--
       }
     }
+
+    if (this.countClickDonut > 1) {
+      for (let c = 80; c < 570; c += 80) {
+
+        if (this.secondEllPosition.x < c) {
+          stepCountHorizontSecond--
+        }
+      }
+
+      for (let r = 80; r < 470; r += 80) {
+
+        if (this.secondEllPosition.y < r) {
+          stepCountVerticalSecond--
+        }
+      }
+    } else {
+      stepCountHorizontSecond = null;
+      stepCountVerticalSecond = null;
+    }
+
+
+    //console.log(' first ', ' x ', stepCountHorizontFirst, ' y ', stepCountVerticalFirst, ' second ', ' x ', stepCountHorizontSecond, ' y ', stepCountVerticalSecond)
     let matrix = {
       '1.1': 1,
       '1.2': 2,
@@ -180,21 +202,20 @@ export default class GameScene extends Phaser.Scene {
       '5.4': 24,
       '5.5': 25,
     }
-    let idFirstEl;
-    let idSecondEl;
+
     if (this.countClickDonut == 1) {
-      idFirstEl = matrix[`${stepCountHorizont}.${stepCountVertical}`]
+      this.idFirstEl = matrix[`${stepCountHorizontFirst}.${stepCountVerticalFirst}`]
     } else if (this.countClickDonut == 2) {
 
-      idSecondEl = matrix[`${stepCountHorizont}.${stepCountVertical}`]
+      this.idSecondEl = matrix[`${stepCountHorizontSecond}.${stepCountVerticalSecond}`]
 
     }
 
 
 
 
-    //console.log(`lol ${stepCountHorizont}.${stepCountVertical}`)
-    console.log('idFirstEl->', idFirstEl, 'idSecondEl', idSecondEl)
+    //console.log(`lol ${this.stepCountHorizont}.${this.stepCountVertical}`)
+
 
 
 
@@ -266,36 +287,93 @@ export default class GameScene extends Phaser.Scene {
 
       //console.log('www',this.firstEllPosition.x - this.secondEllPosition.x)
       if (this.countClickDonut == 2 && this.secondEllPosition.x - this.firstEllPosition.x == 80 || this.secondEllPosition.x - this.firstEllPosition.x == -80 || this.secondEllPosition.y - this.firstEllPosition.y == 80 || this.secondEllPosition.y - this.firstEllPosition.y == -80) {
+        this.swapСhildrenSceneItem(this.children.list, matrix[`${stepCountHorizontFirst}.${stepCountVerticalFirst}`], matrix[`${stepCountHorizontSecond}.${stepCountVerticalSecond}`])
+
+        let result = this.children.list.map((el, i, arr) => {
+
+          if (el.texture.key != 'background') {
+            return el.texture.key
+          }
+        })
+        let text;
+        result.splice(0, 1)
+        let array2 = result.filter(element => element !== null);
+        console.log('this.matchVertikal(result)', this.matchVertikal(result), 'result', array2)
+        if (!this.matchVertikal(array2)) {
+          text = this.add.text(260, 540, "not any match", { font: "32px Arial", fill: "#ffffff", align: "center" });
+          setTimeout(() => {
+            text.destroy()  //matrix[`${stepCountHorizontFirst}.${stepCountVerticalFirst}`]
+          }, 1500)
+          console.log('not match')
+          this.swapСhildrenSceneItem(this.children.list, matrix[`${stepCountHorizontSecond}.${stepCountVerticalSecond}`], matrix[`${stepCountHorizontFirst}.${stepCountVerticalFirst}`])
+          this.tweens.add({
+            targets: this.arrPush[0],
+            x: this.arrPush[1].x,
+            y: this.arrPush[1].y,
+            ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+            duration: 200,
+            repeat: 0,
+            yoyo: true
+          });
+
+
+          this.tweens.add({
+            targets: this.arrPush[1],
+            x: this.arrPush[0].x,
+            y: this.arrPush[0].y,
+            ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+            duration: 200,
+            repeat: 0,            // -1: infinity
+            yoyo: true
+          });
+
+        } else if (this.matchVertikal(array2)) {
+          try {
+            text.destroy()
+          } catch (error) {
+
+          }
+
+          text = this.add.text(260, 540, "match------> 3", { font: "32px Arial", fill: "#ffffff", align: "center" });
+          setTimeout(() => {
+            text.destroy()
+          }, 1500)
+          this.tweens.add({
+            targets: this.arrPush[0],
+            x: this.arrPush[1].x,
+            y: this.arrPush[1].y,
+            ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+            duration: 500,
+            repeat: 0,
+            yoyo: false
+          });
+
+
+          this.tweens.add({
+            targets: this.arrPush[1],
+            x: this.arrPush[0].x,
+            y: this.arrPush[0].y,
+            ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+            duration: 500,
+            repeat: 0,            // -1: infinity
+            yoyo: false
+          });
+          console.log(' match----->')
+        }
         this.countClickDonut = 0;
 
 
-        this.tweens.add({
-          targets: this.arrPush[0],
-          x: this.arrPush[1].x,
-          y: this.arrPush[1].y,
-          ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
-          duration: 500,
-          repeat: 0,
-          yoyo: false
-        });
 
-
-        this.tweens.add({
-          targets: this.arrPush[1],
-          x: this.arrPush[0].x,
-          y: this.arrPush[0].y,
-          ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
-          duration: 500,
-          repeat: 0,            // -1: infinity
-          yoyo: false
-        });
         this.firstEllPosition.x = null;
         this.firstEllPosition.y = null;
         this.secondEllPosition.x = null;
         this.secondEllPosition.y = null;
         el = this.arrPush.map((el) => {
           el.scale = 1
-          swapСhildrenSceneItem(this.children.list, this.idFirstEl, this.idSecondEl)
+
+          console.log('matrix1', typeof matrix[`${stepCountHorizontFirst}.${stepCountVerticalFirst}`], 'matrix2', typeof matrix[`${stepCountHorizontSecond}.${stepCountVerticalSecond}`])
+
+
         });
 
         this.arrPush.length = 0
@@ -330,7 +408,7 @@ export default class GameScene extends Phaser.Scene {
       this.secondEllPosition.x = null;
       this.secondEllPosition.y = null;
     }
-    console.log('this2', this)
+    console.log('this.children.list', this.children.list)
 
   }
 
@@ -415,16 +493,7 @@ export default class GameScene extends Phaser.Scene {
     //console.log('this.add', this.add)
 
     this.add.image(400, 150, "background");
-    // this.add.audio('startMusick', 1, true);
-    // this.sound.play('GameMusick', {
-    //   mute: false,
-    //   volume: 0.05,
-    //   rate: 1,
-    //   detune: 0,
-    //   seek: 0,
-    //   loop: true,
-    //   delay: 0
-    // });
+
     this.initDonuts()
   }
   update() {
