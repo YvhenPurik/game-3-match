@@ -1,6 +1,7 @@
 class Index {
 
   IndexOfmatchElem(list) {
+    // console.log('IndexOfmatchElem', list)
     // console.log('x+y', x + y)
     // let arr = [
     //   [1, 6, 11, 16, 21],
@@ -19,51 +20,61 @@ class Index {
 
     // ]
 
-    let arr = [
-      ["yellow-donut", "esyBlue-donut", "green-donut", "yellow-donut", "yellow-donut"],
-      ["yellow-donut", "blue-donut", "green-donut", "esyBlue-donut", "pink-donut"],
-      ["yellow-donut", "green-donut", "pink-donut", "pink-donut", "pink-donut"],
-      ["esyBlue-donut", "esyBlue-donut", "yellow-donut", "yellow-donut", "blue-donut"],
-      ["blue-donut", "green-donut", "blue-donut", "green-donut", "yellow-donut"],
+    // let arr = [
+    //   ["yellow-donut", "esyBlue-donut", "yellow-donut", "yellow-donut", "yellow-donut"],
+    //   ["yellow-donut", "blue-donut", "green-donut", "esyBlue-donut", "pink-donut"],
+    //   ["yellow-donut", "green-donut", "green-donut", "pink-donut", "pink-donut"],
+    //   ["esyBlue-donut", "esyBlue-donut", "green-donut", "yellow-donut", "blue-donut"],
+    //   ["blue-donut", "green-donut", "blue-donut", "green-donut", "yellow-donut"],
 
-    ]
-    let arr2 = [
+    // ]
+    // let arr2 = [
 
-    ]
-    //arrDonuts = ['red-donut', 'blue-donut', 'green-donut', 'esyBlue-donut', 'yellow-donut', 'pink-donut',]
-
-    // let random = (length, arr) => {
-    //   return arr[Math.floor((Math.random() * length))];
+    // ]
+    // let size = 5; //размер подмассива
+    // let subarray = []; //массив в который будет выведен результат.
+    // for (let i = 0; i < Math.ceil(list.length / size); i++) {
+    //   subarray[i] = list.slice((i * size), (i * size) + size);
     // }
-    //console.log('random(arrDonuts.length)', random(arrDonuts.length, arrDonuts))
-    //console.log('arr', arr[0][0] == arr[1][0])
-    // let temp = [];
-    let count = 0;
-    console.log('arr2', arr2)
-    for (let c = 0; c < 5; c++) {
 
-      for (let r = 0; r < 5; r++) {
 
-        console.log(arr[r != 4 ? r + 1 : r][c] == arr[r][c])
-        if (arr[r][c] == arr[r != 4 ? r + 1 : r][c] || count == 2) {
-          count++
-          arr2.push(arr[count > 1 ? r - 1 : r][c])
-          //arr2.push(arr[r][c])
-        } else {
-          count = 0
-          arr2.push('xxx')
-        }
-        //arr3.push(random(arrDonuts.length, arrDonuts))
-        // if (arr2[i][j] == arr2[i][j + 1]) {
-        //   temp.push(arr[i][j])
-        //   temp.push(arr[i][j + 1])
-        // }
-      }
-    }
+    //   let count = 0;
+    //   let temp = [];
+    //   for (let row in arr) {
+    //     for (let col in arr) {
+    //       count++
+    //       console.log('arr[col][row]', arr[col][row], count)
+    //       // if (arr[col][row] == arr[this.fpm(col) - 1][row]) {
+    //       //   count++
+    //       //   console.log('arr[col][row]', arr[this.fpm(col) - 1][row], count)
 
+    //       // } else {
+
+    //       //   temp.push(null)
+    //       // }
+
+    //     }
+    //   }
+
+    //   console.log('temp', temp)
+    // }
+    // fpm(r) {
+    //   if (r == 0) {
+    //     console.log('r=1')
+    //     return 1
+    //   }
+    //   else return r
+    // }
+    // fpp(r) {
+    //   if (r == 5) return -1
+    //   else return r
+    // }
+    let res = Object.assign({}, list)
+    console.log('res', res)
+    // for (let key in res) {
+    //   console.log('res', res[key], Object.keys(res[key]))
+    // }
   }
-
-
 }
 
 export default Index

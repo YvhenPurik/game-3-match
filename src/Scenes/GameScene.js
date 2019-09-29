@@ -30,8 +30,7 @@ export default class GameScene extends Phaser.Scene {
 
 
   preload() {
-    this.index = new Index()
-    this.index.IndexOfmatchElem()
+
     this.load.image('background', '../src/assets/background.jpg');
     this.load.image('red-donut', '../src/assets/gem-01.png', 193, 71);
     this.load.image('blue-donut', '../src/assets/gem-02.png', 193, 71);
@@ -46,7 +45,7 @@ export default class GameScene extends Phaser.Scene {
 
   matchVertikal(list) {
     // vertical initial match
-    console.log('list', list)
+    // console.log('list', list)
     const equalCol1 = list[0] == list[1] && list[1] == list[2]
       || list[1] == list[2] && list[2] == list[3]
       || list[2] == list[3] && list[3] == list[4];
@@ -112,10 +111,16 @@ export default class GameScene extends Phaser.Scene {
 
   listenerSwap(pointer, el) {
 
+    let res = this.children.list.map((el) => {
+      //console.log('el2', el)
+      if (el.texture.key != 'background') {
+        return el.texture.key
+      }
+    })
 
-
-
-
+    res.shift()
+    this.index = new Index()
+    this.index.IndexOfmatchElem(res)
 
 
     let stepCountHorizontFirst = 5;
@@ -298,7 +303,7 @@ export default class GameScene extends Phaser.Scene {
         let text;
         result.splice(0, 1)
         let array2 = result.filter(element => element !== null);
-        console.log('this.matchVertikal(result)', this.matchVertikal(result), 'result', array2)
+        //console.log('this.matchVertikal(result)', this.matchVertikal(result), 'result', array2)
         if (!this.matchVertikal(array2)) {
           text = this.add.text(260, 540, "not any match", { font: "32px Arial", fill: "#ffffff", align: "center" });
           setTimeout(() => {
@@ -408,7 +413,7 @@ export default class GameScene extends Phaser.Scene {
       this.secondEllPosition.x = null;
       this.secondEllPosition.y = null;
     }
-    console.log('this.children.list', this.children.list)
+    //console.log('this.children.list', this.children.list)
 
   }
 
