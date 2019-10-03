@@ -31,6 +31,8 @@ export default class GameScene extends Phaser.Scene {
 
   preload() {
 
+
+
     this.load.image('background', '../src/assets/background.jpg');
     this.load.image('red-donut', '../src/assets/gem-01.png', 193, 71);
     this.load.image('blue-donut', '../src/assets/gem-02.png', 193, 71);
