@@ -113,16 +113,8 @@ export default class GameScene extends Phaser.Scene {
 
   listenerSwap(pointer, el) {
 
-    let res = this.children.list.map((el) => {
-      //console.log('el2', el)
-      if (el.texture.key != 'background') {
-        return el.texture.key
-      }
-    })
 
-    res.shift()
-    this.index = new Index()
-    this.index.IndexOfmatchElem(res)
+
 
 
     let stepCountHorizontFirst = 5;
@@ -342,6 +334,16 @@ export default class GameScene extends Phaser.Scene {
           }
 
           text = this.add.text(260, 540, "match------> 3", { font: "32px Arial", fill: "#ffffff", align: "center" });
+          let res = this.children.list.map((el) => {
+            //console.log('el2', el)
+            if (el.texture.key != 'background') {
+              return el.texture.key
+            }
+          })
+
+          res.shift()
+          this.index = new Index()
+          this.index.IndexOfmatchElem(res)
           setTimeout(() => {
             text.destroy()
           }, 1500)

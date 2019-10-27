@@ -21,9 +21,9 @@ class Index {
     // ]
 
     // let arr = [
-    //   ["yellow-donut", "esyBlue-donut", "yellow-donut", "yellow-donut", "yellow-donut"],
-    //   ["yellow-donut", "blue-donut", "green-donut", "esyBlue-donut", "pink-donut"],
-    //   ["yellow-donut", "green-donut", "green-donut", "pink-donut", "pink-donut"],
+    //   ["esyBlue-donut", "esyBlue-donut", "yellow-donut", "yellow-donut", "yellow-donut"],
+    //   ["esyBlue-donut", "blue-donut", "green-donut", "esyBlue-donut", "pink-donut"],
+    //   ["yellow-donut", "yellow-donut", "yellow-donut", "pink-donut", "pink-donut"],
     //   ["esyBlue-donut", "esyBlue-donut", "green-donut", "yellow-donut", "blue-donut"],
     //   ["blue-donut", "green-donut", "blue-donut", "green-donut", "yellow-donut"],
 
@@ -38,26 +38,20 @@ class Index {
     // }
 
 
-    //   let count = 0;
-    //   let temp = [];
-    //   for (let row in arr) {
-    //     for (let col in arr) {
-    //       count++
-    //       console.log('arr[col][row]', arr[col][row], count)
-    //       // if (arr[col][row] == arr[this.fpm(col) - 1][row]) {
-    //       //   count++
-    //       //   console.log('arr[col][row]', arr[this.fpm(col) - 1][row], count)
+    let count = 0;
+    let temp = [];
+    for (let row in list) {
+      console.log('list', list[row])
+      if (list[row] == list[row + 1]) {
+        console.log('mattttch 3 list')
+        temp.push(1)
+      } else {
+        temp.push(0)
+      }
+    }
 
-    //       // } else {
 
-    //       //   temp.push(null)
-    //       // }
-
-    //     }
-    //   }
-
-    //   console.log('temp', temp)
-    // }
+    console.log('temp', temp)
     // fpm(r) {
     //   if (r == 0) {
     //     console.log('r=1')
@@ -69,11 +63,9 @@ class Index {
     //   if (r == 5) return -1
     //   else return r
     // }
-    let res = Object.assign({}, list)
-    console.log('res', res)
-    // for (let key in res) {
-    //   console.log('res', res[key], Object.keys(res[key]))
-    // }
+    //     let res = Object.assign({}, list)
+    // console.log('res', res)
+
   }
 }
 
