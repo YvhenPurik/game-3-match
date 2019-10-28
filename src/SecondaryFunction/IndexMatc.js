@@ -29,9 +29,9 @@ class Index {
     //   ["blue-donut", "green-donut", "blue-donut", "green-donut", "yellow-donut"],
 
     // ]
-    // let arr2 = [
+    let arr2 = [
 
-    // ]
+    ]
     // let size = 5; //размер подмассива
     // let subarray = []; //массив в который будет выведен результат.
     // for (let i = 0; i < Math.ceil(list.length / size); i++) {
@@ -43,11 +43,11 @@ class Index {
     let temp = [];
     for (let col in list) {
       for (let row in list) {
-        console.log('col and row', list)
+        console.log('col and row', row, col)
       }
     }
-
-
+    console.log('list', list)
+    // console.log('subarray', subarray)
     // console.log('list', list)
     // console.log('temp', temp)
     // fpm(r) {
