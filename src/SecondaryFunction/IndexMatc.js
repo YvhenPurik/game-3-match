@@ -1,6 +1,7 @@
 class Index {
 
   IndexOfmatchElem(list) {
+    list.splice(-1, 1)
     // console.log('IndexOfmatchElem', list)
     // console.log('x+y', x + y)
     // let arr = [
@@ -40,18 +41,15 @@ class Index {
 
     let count = 0;
     let temp = [];
-    for (let row in list) {
-      console.log('list', list[row])
-      if (list[row] == list[row + 1]) {
-        console.log('mattttch 3 list')
-        temp.push(1)
-      } else {
-        temp.push(0)
+    for (let col in list) {
+      for (let row in list) {
+        console.log('col and row', list)
       }
     }
 
 
-    console.log('temp', temp)
+    // console.log('list', list)
+    // console.log('temp', temp)
     // fpm(r) {
     //   if (r == 0) {
     //     console.log('r=1')
