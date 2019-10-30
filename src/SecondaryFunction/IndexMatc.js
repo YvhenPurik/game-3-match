@@ -29,41 +29,18 @@ class Index {
     //   ["blue-donut", "green-donut", "blue-donut", "green-donut", "yellow-donut"],
 
     // ]
-    let arr2 = [
+    // 
+    var matrix = [], i, k;
 
-    ]
-    let size = 5; //размер подмассива
-    let subarray = []; //массив в который будет выведен результат.
-    for (let i = 5; i < Math.ceil(list.length / size); i--) {
-      subarray[i] = list.slice((i * size), (i * size) + size);
+    for (i = 0, k = -1; i < list.length; i++) {
+      if (i % 5 === 0) {
+        k++;
+        matrix[k] = [];
+      }
+
+      matrix[k].push(list[i]);
     }
-
-
-    // let count = 0;
-    // let temp = [];
-    // for (let col in subarray) {
-    //   for (let row in subarray) {
-    //     console.log('col and row', subarray[row][col])
-    //   }
-    // }
-    // console.log('list', list)
-    console.log('subarray', subarray)
-    // console.log('list', list)
-    // console.log('temp', temp)
-    // fpm(r) {
-    //   if (r == 0) {
-    //     console.log('r=1')
-    //     return 1
-    //   }
-    //   else return r
-    // }
-    // fpp(r) {
-    //   if (r == 5) return -1
-    //   else return r
-    // }
-    //     let res = Object.assign({}, list)
-    // console.log('res', res)
-
+    console.log('matrix', matrix)
   }
 }
 
