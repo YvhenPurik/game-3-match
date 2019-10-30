@@ -32,22 +32,22 @@ class Index {
     let arr2 = [
 
     ]
-    // let size = 5; //размер подмассива
-    // let subarray = []; //массив в который будет выведен результат.
-    // for (let i = 0; i < Math.ceil(list.length / size); i++) {
-    //   subarray[i] = list.slice((i * size), (i * size) + size);
-    // }
-
-
-    let count = 0;
-    let temp = [];
-    for (let col in list) {
-      for (let row in list) {
-        console.log('col and row', row, col)
-      }
+    let size = 5; //размер подмассива
+    let subarray = []; //массив в который будет выведен результат.
+    for (let i = 5; i < Math.ceil(list.length / size); i--) {
+      subarray[i] = list.slice((i * size), (i * size) + size);
     }
-    console.log('list', list)
-    // console.log('subarray', subarray)
+
+
+    // let count = 0;
+    // let temp = [];
+    // for (let col in subarray) {
+    //   for (let row in subarray) {
+    //     console.log('col and row', subarray[row][col])
+    //   }
+    // }
+    // console.log('list', list)
+    console.log('subarray', subarray)
     // console.log('list', list)
     // console.log('temp', temp)
     // fpm(r) {
