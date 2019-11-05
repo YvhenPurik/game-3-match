@@ -1,4 +1,14 @@
 class Index {
+  TransMatrix(A) {
+    var m = A.length, n = A[0].length, AT = [];
+    for (var i = 0; i < n; i++) {
+      AT[i] = [];
+      for (var j = 0; j < m; j++) {
+        AT[i][j] = A[j][i];
+      }
+    }
+    return AT;
+  }
 
   IndexOfmatchElem(list) {
     list.splice(-1, 1)
@@ -30,6 +40,7 @@ class Index {
 
     // ]
     // 
+
     var matrix = [], i, k;
 
     for (i = 0, k = -1; i < list.length; i++) {
@@ -40,7 +51,7 @@ class Index {
 
       matrix[k].push(list[i]);
     }
-    console.log('matrix', matrix)
+    console.log('matrix', this.TransMatrix(matrix))
   }
 }
 
