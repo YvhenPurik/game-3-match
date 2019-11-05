@@ -49,10 +49,15 @@ class Index {
         console.log(k)
         matrix[k] = [];
       } if (list[i] === list[i + 1] && list[i + 1] === list[i + 2]) {
-        matrix[k].push(list[i] = null)
-        matrix[k].push(list[i] = null)
-        matrix[k].push(list[i] = null)
+        matrix[k].push(list[i] = "empty-empty")
+        matrix[k].push(list[i] = "empty-empty")
+        matrix[k].push(list[i] = "empty-empty")
+        matrix[k].push(list[i] = list[i + 3])
+        matrix[k].push(list[i] = list[i + 4])
+
+
       } else {
+        console.log("i", i)
         matrix[k].push(list[i]);
       }
 
