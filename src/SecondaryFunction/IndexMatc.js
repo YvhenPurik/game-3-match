@@ -1,5 +1,5 @@
 class Index {
-  TransMatrix(A) {
+  transMatrix(A) {
     var m = A.length, n = A[0].length, AT = [];
     for (var i = 0; i < n; i++) {
       AT[i] = [];
@@ -46,12 +46,20 @@ class Index {
     for (i = 0, k = -1; i < list.length; i++) {
       if (i % 5 === 0) {
         k++;
+        console.log(k)
         matrix[k] = [];
+      } if (list[i] === list[i + 1] && list[i + 1] === list[i + 2]) {
+        matrix[k].push(list[i] = null)
+        matrix[k].push(list[i] = null)
+        matrix[k].push(list[i] = null)
+      } else {
+        matrix[k].push(list[i]);
       }
 
-      matrix[k].push(list[i]);
+
     }
-    console.log('matrix', this.TransMatrix(matrix))
+    let newArr = this.transMatrix(matrix)
+    console.log('NewArr', newArr)
   }
 }
 
