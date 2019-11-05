@@ -52,6 +52,7 @@ class Index {
         matrix[k].push(list[i] = null)
         matrix[k].push(list[i] = null)
         matrix[k].push(list[i] = null)
+
       } else {
         matrix[k].push(list[i]);
       }
