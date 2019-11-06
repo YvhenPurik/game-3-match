@@ -20,21 +20,23 @@ class Index {
 
         matrix[k] = [];
       }
-      console.log('list[i', list[i])
-      const dontMatchWithOtherRow = list[i + 3] === list[i + 4] || list[i + 4] === list[i + 5] // тут проблемки
-      if (list[i] === list[i + 1] && list[i + 1] === list[i + 2] && list[i + 2] === list[i + 3] && list[i + 3] === list[i + 4] && !dontMatchWithOtherRow) {
+      const num = 3 != i && 4 != i && 8 != i && 9 != i && 13 != i && 14 != i && 18 != i && 19 != i
+      if (num && list[i] === list[i + 1] && list[i + 1] === list[i + 2] && list[i + 2] === list[i + 3] && list[i + 3] === list[i + 4]) {
+        console.log('list[i', num, i)
         matrix[k].push(list[i] = 11111111111)
         matrix[k].push(list[i] = 11111111111)
         matrix[k].push(list[i] = 11111111111)
         matrix[k].push(list[i] = 11111111111)
         matrix[k].push(list[i] = 11111111111)
-      } if (list[i] === list[i + 1] && list[i + 1] === list[i + 2] && list[i + 2] === list[i + 3] && !dontMatchWithOtherRow) {
+      } if (num && list[i] === list[i + 1] && list[i + 1] === list[i + 2] && list[i + 2] === list[i + 3]) {
+        console.log('list[i', num, i)
         matrix[k].push(list[i] = 11111111111)
         matrix[k].push(list[i] = 11111111111)
         matrix[k].push(list[i] = 11111111111)
         matrix[k].push(list[i] = 11111111111)
         matrix[k].push(list[i] = list[i + 4])
-      } if (list[i] === list[i + 1] && list[i + 1] === list[i + 2] && !dontMatchWithOtherRow) {
+      } if (num && list[i] === list[i + 1] && list[i + 1] === list[i + 2]) {
+        console.log('list[i', num, i)
         matrix[k].push(list[i] = 11111111111)
         matrix[k].push(list[i] = 11111111111)
         matrix[k].push(list[i] = 11111111111)
