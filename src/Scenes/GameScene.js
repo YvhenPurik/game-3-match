@@ -1,5 +1,5 @@
 import 'phaser';
-import Index from '../SecondaryFunction/IndexMatc'
+import Index from '../SecondaryClass/IndexMatc'
 
 
 
@@ -121,7 +121,7 @@ export default class GameScene extends Phaser.Scene {
     let stepCountVerticalFirst = 5;
     let stepCountHorizontSecond = 5;
     let stepCountVerticalSecond = 5;
-    // console.log('el', el)
+    //.log('el', el)
     this.countClickDonut++
     if (this.countClickDonut == 1) {
 
@@ -297,7 +297,7 @@ export default class GameScene extends Phaser.Scene {
         let text;
         result.splice(0, 1)
         let array2 = result.filter(element => element !== null);
-        //console.log('this.matchVertikal(result)', this.matchVertikal(result), 'result', array2)
+        console.log('result', array2)
         if (!this.matchVertikal(array2)) {
           text = this.add.text(260, 540, "not any match", { font: "32px Arial", fill: "#ffffff", align: "center" });
           setTimeout(() => {
