@@ -50,6 +50,7 @@ class Index {
 
 
     }
+
     let newArr = matrix
     newArr.length = 5
     //newArr.flat(Infinity) делает из многомерного масива в одномерній 
@@ -57,7 +58,14 @@ class Index {
       return el != null
     })
     newArr2.length = 25
-    console.table('NewArr', newArr2)
+
+    if (newArr2.indexOf(11111111111) == -1) {
+      this.IndexOfmatchElem(this.transMatrix(newArr).flat(Infinity))
+      console.log("HORIZONTAL")
+    } else {
+      console.log("VERTYCAL")
+    }
+    console.table('newArr2', newArr2)
   }
 }
 
