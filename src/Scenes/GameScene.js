@@ -343,7 +343,15 @@ export default class GameScene extends Phaser.Scene {
 
           res.shift()
           this.index = new Index()
-          this.index.IndexOfmatchElem(res)
+          this.index.findClaster(res)
+
+          // let res2 = this.children.list.map((el) => {
+          //   //console.log('el2', el)
+          //   if (el.texture.key != 'background') {
+          //     return el.texture.key
+          //   }
+          // })
+          // this.index.IndexOfmatchElemHorizontal(res2)
           setTimeout(() => {
             text.destroy()
           }, 1500)
