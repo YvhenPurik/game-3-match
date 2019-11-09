@@ -343,15 +343,22 @@ export default class GameScene extends Phaser.Scene {
 
           res.shift()
           this.index = new Index()
-          this.index.findClaster(res)
+          this.index.findClasterVertical(res)
 
-          // let res2 = this.children.list.map((el) => {
-          //   //console.log('el2', el)
-          //   if (el.texture.key != 'background') {
-          //     return el.texture.key
-          //   }
-          // })
-          // this.index.IndexOfmatchElemHorizontal(res2)
+          let res2 = this.children.list.map((el) => {
+
+            return el.texture.key
+
+          })
+          var filtered = res2.filter(function (el) {
+            if (el != null && el != 'background') {
+              return el
+            }
+
+          });
+          this.index.findClasterHorizontal(filtered)
+
+
           setTimeout(() => {
             text.destroy()
           }, 1500)
@@ -459,6 +466,7 @@ export default class GameScene extends Phaser.Scene {
         var donutX = (c * (donutsInfo.width + donutsInfo.padding)) + donutsInfo.offset.left;
         var donutY = (r * (donutsInfo.height + donutsInfo.padding)) + donutsInfo.offset.top;
         this.newDonuts = this.add.image(donutX, donutY, arrDonuts.random(arrDonuts.length));
+
         // this.physics.enable(newDonuts, Phaser.Physics.ARCADE);
         //console.log('this.newDonuts')
         // this.newDonuts.body.immovable = true;
