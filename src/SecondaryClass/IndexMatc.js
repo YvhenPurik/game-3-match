@@ -1,3 +1,5 @@
+import 'phaser';
+
 class Index {
   constructor() {
 
@@ -63,14 +65,16 @@ class Index {
       return el != null
     })
     newArr2.length = 25
-    console.log(this.transMatrix(this.matrix))
-    console.log('Vertical', newArr2)
+    // console.log(this.transMatrix(this.matrix))
+    // console.log('Vertical', newArr2)
 
   }
 
 
   findClasterHorizontal(list) {
-    console.log('Horizontal', list)
+
+
+    // console.log('Horizontal', list)
     let matrix2 = []
     for (let i = 0, k = -1; i < list.length; i++) {
       if (i % 5 === 0) {
@@ -115,7 +119,7 @@ class Index {
     let newAeer = []
     for (let i = 0; i < 5; i++) {
       for (let j = 0; j < 5; j++) {
-        console.log('new matrix', matrix2[j][i])
+        //console.log('new matrix', matrix2[j][i])
         newAeer.push(matrix2[j][i])
       }
     }
@@ -142,7 +146,7 @@ class Index {
 
         matrix3[k] = [];
       }
-      console.log('list[i]', list[i])
+      //console.log('list[i]', list[i])
       const num = 3 != i && 4 != i && 8 != i && 9 != i && 13 != i && 14 != i && 18 != i && 19 != i
       if (num && newAeer[i] === newAeer[i + 1] && newAeer[i + 1] === newAeer[i + 2] && newAeer[i + 2] === newAeer[i + 3] && newAeer[i + 3] === newAeer[i + 4]) {
         console.log('list[5]', num, i)
@@ -197,10 +201,24 @@ class Index {
     for (let i = 0; i < matrix3.length; i++) {
       matrix3[i].length = 5
     }
-
-
-    console.log('matrix3', matrix3)
-
+    let matrix4 = []
+    for (let i = 0; i < 5; i++) {
+      for (let j = 0; j < 5; j++) {
+        //console.log('new matrix', matrix2[j][i])
+        matrix4.push(matrix3[j][i])
+      }
+    }
+    let args = []
+    for (let i = 0; i < matrix4.length; i++) {
+      if (matrix4[i] === 11111111111) {
+        args.push(i)
+      } else {
+        args.push(null)
+      }
+    }
+    // console.log('this', this)
+    // console.log('matrix3', matrix3)
+    return args
   }
 
 }

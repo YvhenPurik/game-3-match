@@ -345,6 +345,7 @@ export default class GameScene extends Phaser.Scene {
           this.index = new Index()
           this.index.findClasterVertical(res)
 
+
           let res2 = this.children.list.map((el) => {
 
             return el.texture.key
@@ -356,9 +357,15 @@ export default class GameScene extends Phaser.Scene {
             }
 
           });
-          this.index.findClasterHorizontal(filtered)
+          let args = this.index.findClasterHorizontal(filtered)
 
+          console.log('trtr', args)
+          this.scene.scene.children.getAll().forEach((s, i) => {
+            if (s.texture.key !== 'background' && args[i - 1] != null) {
+              s.destroy()
+            }
 
+          })
           setTimeout(() => {
             text.destroy()
           }, 1500)
