@@ -88,6 +88,7 @@ class Index {
 
         matrix2[k] = [];
       }
+
       console.log('list[i]', list[i]);
       const num = 3 != i && 4 != i && 8 != i && 9 != i && 13 != i && 14 != i && 18 != i && 19 != i;
       if (
